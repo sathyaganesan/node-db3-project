@@ -19,8 +19,44 @@ function findSteps(id) {
         .where("steps.id", id)
 }
 
+// function add(scheme) {
+//     return db('schemes').insert(scheme)
+//         .then((id) => {
+//             return db('schemes').where('id', id)
+//         })
+// }
+
+function add(scheme) {
+    return db("schemes")
+        .insert(scheme)
+        .into("schemes")
+}
+
+function addStep(step, scheme_id) {
+    return db("steps")
+        .insert(step)
+        .into("steps")
+    .where("schemes.id", scheme_id)
+}
+
+function update(change, scheme_id) {
+    return db("schemes")
+        .where("id", scheme_id)
+        .update(change)
+}
+
+function remove(id) {
+    return db("schemes")
+        .where("id", id)
+        .del()
+}
+
 module.exports = {
     find,
     findById,
     findSteps,
+    add,
+    addStep,
+    update,
+    remove
 }
